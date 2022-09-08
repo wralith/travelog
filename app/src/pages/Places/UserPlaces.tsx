@@ -8,7 +8,7 @@ const dummyPlaces: Place[] = [
     description: 'Tick tock',
     image: 'https://www.vektorler.com/wp-content/uploads/2020/03/izmir-saat-kulesi-scaled.jpg',
     address: 'Izmir, Konak square',
-    coordinates: { latitude: 38.4189, longitude: 27.1287 },
+    coordinates: { latitude: '38.4189', longitude: '27.1287' },
     createdBy: '1'
   },
   {
@@ -17,13 +17,13 @@ const dummyPlaces: Place[] = [
     description: 'Tick tock',
     image: 'https://www.vektorler.com/wp-content/uploads/2020/03/izmir-saat-kulesi-scaled.jpg',
     address: 'Izmir, Konak square',
-    coordinates: { latitude: 38.4189, longitude: 27.1287 },
+    coordinates: { latitude: '38.4189', longitude: '27.1287' },
     createdBy: '1'
   }
 ]
 
 export function UserPlaces() {
   const userId = useParams().userId
-  const loadedPlaces = dummyPlaces.filter(place => place.createdBy == userId)
+  const loadedPlaces = dummyPlaces.filter((place) => place.createdBy == userId)
   return <PlaceList places={loadedPlaces} />
 }

@@ -1,6 +1,5 @@
 import { FormEventHandler, ReactNode } from 'react'
 import { createPortal } from 'react-dom'
-import { CSSTransition } from 'react-transition-group'
 
 import Backdrop from './Backdrop'
 import Card from './Card'
@@ -21,11 +20,9 @@ interface Props {
 
 function Modal(props: Props) {
   return (
-    <div className='w-full h-full fixed text-center'>
+    <div className="w-full h-full fixed text-center">
       {props.backdrop && <Backdrop onClick={props.onCancel} />}
-      {/* <CSSTransition in={props.show} mountOnEnter unmountOnExit timeout={200}> */}
       <ModalOverlay {...props.childProps} />
-      {/* </CSSTransition> */}
     </div>
   )
 }
@@ -33,7 +30,7 @@ function Modal(props: Props) {
 function ModalOverlay(props: OverlayProps) {
   const content = (
     <Card className="z-[90] flex-col top-1/2 left-1/2 fixed -translate-x-1/2 -translate-y-1/2">
-      <header>{props.title}</header>
+      <header className='text-xl font-bold'>{props.title}</header>
       <form onSubmit={props.onSubmit ? props.onSubmit : (e) => e.preventDefault}></form>
       <div>{props.content}</div>
       <footer>{props.footer}</footer>

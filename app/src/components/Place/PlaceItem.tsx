@@ -18,7 +18,17 @@ function PlaceItem({ place }: Props) {
           backdrop
           show={showMap}
           onCancel={toggleMap}
-          childProps={{ title: 'Map', content: 'Map Content', onSubmit: toggleMap }}
+          childProps={{
+            title: place.address,
+            content: (
+              <div className="flex flex-col text-center justify-center gap-5 w-96 h-96">
+                <img className='rounded opacity-50' src={place.image} alt={place.title} />
+                <h2>This feature is not available yet!</h2>
+                <MapContent coordinates={place.coordinates} />
+              </div>
+            ),
+            onSubmit: toggleMap
+          }}
         />
       )}
       <li className="w-full lg:w-1/2">
@@ -31,7 +41,9 @@ function PlaceItem({ place }: Props) {
           </div>
           <hr className="w-full border-base-content/30" />
           <div className="flex p-2 gap-2">
-            <button className="btn btn-sm btn-primary" onClick={() => toggleMap()}>Show on Map</button>
+            <button className="btn btn-sm btn-primary" onClick={() => toggleMap()}>
+              Show on Map
+            </button>
             <button className="btn btn-sm btn-primary">
               <Link to={`/places/${place.id}`}>Edit</Link>
             </button>
@@ -40,6 +52,21 @@ function PlaceItem({ place }: Props) {
         </Card>
       </li>
     </>
+  )
+}
+
+interface MapContentProps {
+  coordinates: Coordinates
+}
+
+function MapContent({ coordinates }: MapContentProps) {
+  return (
+    <a
+      target="_blank"
+      href={`https://www.google.com/maps/search/?api=1&query=${coordinates.latitude},${coordinates.longitude}`}
+    >
+      <button className="btn btn-primary btn-xl">Go To Google Maps</button>
+    </a>
   )
 }
 

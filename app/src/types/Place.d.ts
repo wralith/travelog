@@ -5,8 +5,10 @@ interface Place {
   description: string
   address: string
   createdBy: string // User.id
-  coordinates: {
-    latitude: number,
-    longitude: number,
-  }
+  coordinates: Coordinates
+}
+
+interface Coordinates {
+  latitude: string
+  longitude: string
 }
