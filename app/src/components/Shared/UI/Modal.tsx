@@ -13,7 +13,6 @@ interface OverlayProps {
 
 interface Props {
   backdrop: boolean
-  show: any
   onCancel: any
   childProps: OverlayProps
 }
@@ -29,9 +28,8 @@ function Modal(props: Props) {
 
 function ModalOverlay(props: OverlayProps) {
   const content = (
-    <Card className="z-[90] flex-col top-1/2 left-1/2 fixed -translate-x-1/2 -translate-y-1/2">
-      <header className='text-xl font-bold'>{props.title}</header>
-      <form onSubmit={props.onSubmit ? props.onSubmit : (e) => e.preventDefault}></form>
+    <Card className="z-[90] flex-col top-1/2 left-1/2 fixed -translate-x-1/2 -translate-y-1/2 text-center">
+      <header className="text-xl font-bold">{props.title}</header>
       <div>{props.content}</div>
       <footer>{props.footer}</footer>
     </Card>

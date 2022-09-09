@@ -9,25 +9,52 @@ interface Props {
 
 function PlaceItem({ place }: Props) {
   const [showMap, setShowMap] = useState(false)
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
   const toggleMap = () => setShowMap(!showMap)
+  const toggleDeleteConfirmation = () => setShowDeleteConfirmation(!showDeleteConfirmation)
+
+  const handleDelete = (item: string) => {
+    console.log(`This feature is not implemented yet, but if it were ${item} would be gone!`)
+  }
 
   return (
     <>
       {showMap && (
         <Modal
           backdrop
-          show={showMap}
           onCancel={toggleMap}
           childProps={{
             title: place.address,
             content: (
               <div className="flex flex-col text-center justify-center gap-5 w-96 h-96">
-                <img className='rounded opacity-50' src={place.image} alt={place.title} />
+                <img className="rounded opacity-50" src={place.image} alt={place.title} />
                 <h2>This feature is not available yet!</h2>
                 <MapContent coordinates={place.coordinates} />
               </div>
-            ),
-            onSubmit: toggleMap
+            )
+          }}
+        />
+      )}
+      {showDeleteConfirmation && (
+        <Modal
+          backdrop
+          onCancel={toggleDeleteConfirmation}
+          childProps={{
+            title: `You are about to delete ${place.title} from system!`,
+            content: (
+              <div className="flex flex-col text-center justify-center gap-5 w-96 h-96">
+                <img className="rounded opacity-50" src={place.image} alt={place.title} />
+                <h2>Deletion cannot be undone, please make sure before you deleting it!</h2>
+                <div className='flex gap-2 m-auto'>
+                  <button className="btn btn-primary" onClick={toggleDeleteConfirmation}>
+                    Cancel
+                  </button>
+                  <button className="btn btn-warning" onClick={() => handleDelete(place.title)}>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            )
           }}
         />
       )}
@@ -47,7 +74,9 @@ function PlaceItem({ place }: Props) {
             <button className="btn btn-sm btn-primary">
               <Link to={`/places/${place.id}/update`}>Edit</Link>
             </button>
-            <button className="btn btn-sm btn-error">Delete</button>
+            <button className="btn btn-sm btn-error" onClick={() => toggleDeleteConfirmation()}>
+              Delete
+            </button>
           </div>
         </Card>
       </li>
