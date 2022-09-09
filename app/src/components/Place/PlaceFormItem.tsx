@@ -7,14 +7,14 @@ interface Props {
   type?: 'input' | 'textarea'
 }
 
-function NewPlaceFormItem({ name, schema, error, type = 'input' }: Props) {
+function PlaceFormItem({ name, schema, error, type = 'input' }: Props) {
   const [animate] = useAutoAnimate<HTMLDivElement>()
 
   return (
     <div ref={animate}>
       {error && <span className="text-sm text-error-content bg-error p-2 rounded-t-lg">{error.message}</span>}
       {type === 'textarea' ? (
-        <textarea className="textarea textarea-bordered w-full" placeholder={name} {...schema} />
+        <textarea className="textarea textarea-bordered w-full" placeholder={name} {...schema}  />
       ) : (
         <input className="input input-bordered w-full" placeholder={name} {...schema} />
       )}
@@ -22,4 +22,4 @@ function NewPlaceFormItem({ name, schema, error, type = 'input' }: Props) {
   )
 }
 
-export default NewPlaceFormItem
+export default PlaceFormItem

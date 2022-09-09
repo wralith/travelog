@@ -5,3 +5,4 @@ export { Users } from './Users/Users'
 export { UserPlaces } from './Places/UserPlaces'
 
 export { NewPlace } from './Places/NewPlace'
+export { UpdatePlace } from './Places/UpdatePlace'

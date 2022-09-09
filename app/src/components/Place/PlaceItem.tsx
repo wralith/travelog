@@ -45,7 +45,7 @@ function PlaceItem({ place }: Props) {
               Show on Map
             </button>
             <button className="btn btn-sm btn-primary">
-              <Link to={`/places/${place.id}`}>Edit</Link>
+              <Link to={`/places/${place.id}/update`}>Edit</Link>
             </button>
             <button className="btn btn-sm btn-error">Delete</button>
           </div>

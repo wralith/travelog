@@ -3,13 +3,17 @@ import { useYupValidationResolver } from '../../hooks/useYupValidationResolver'
 import PlaceFormItem from './PlaceFormItem'
 import { NewPlaceInputs, placeSchema } from './placeValidationSchema'
 
-function NewPlaceForm() {
+interface Props {
+  defaultValues: Place
+}
+
+function UpdatePlaceForm({defaultValues}: Props) {
   const resolver = useYupValidationResolver<NewPlaceInputs>(placeSchema)
   const {
     handleSubmit,
     register,
     formState: { errors }
-  } = useForm({ resolver })
+  } = useForm({ resolver, defaultValues })
 
   return (
     <form onSubmit={handleSubmit((data) => console.log(data))} className="flex flex-col gap-2">
@@ -30,4 +34,4 @@ function NewPlaceForm() {
   )
 }
 
-export default NewPlaceForm
+export default UpdatePlaceForm
