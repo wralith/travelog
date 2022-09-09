@@ -10,11 +10,14 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@formkit/auto-animate": "1.0.0-beta.3",
     "@tabler/icons": "^1.94.0",
     "daisyui": "^2.25.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "6"
+    "react-hook-form": "^7.34.2",
+    "react-router-dom": "6",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

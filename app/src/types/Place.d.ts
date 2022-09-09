@@ -1,8 +1,8 @@
 interface Place {
   id: string
-  image: string
   title: string
   description: string
+  image: string
   address: string
   createdBy: string // User.id
   coordinates: Coordinates

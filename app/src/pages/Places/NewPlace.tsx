@@ -1,3 +1,9 @@
+import NewPlaceForm from '../../components/Place/NewPlaceForm'
+
 export function NewPlace() {
-  return ( <div>New Place Page</div> );
+  return (
+    <div>
+      <NewPlaceForm />
+    </div>
+  )
 }

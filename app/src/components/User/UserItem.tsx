@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { User } from '../../types/User'
 import Avatar from '../Shared/UI/Avatar'
 import Card from '../Shared/UI/Card'
 

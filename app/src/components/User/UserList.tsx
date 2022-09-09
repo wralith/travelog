@@ -1,4 +1,3 @@
-import { User } from '../../types/User'
 import UserItem from './UserItem'
 
 interface Props {

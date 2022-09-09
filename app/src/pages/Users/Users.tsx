@@ -1,5 +1,4 @@
 import UserList from '../../components/User/UserList'
-import { User } from '../../types/User'
 
 export function Users() {
   const users: User[] = [
