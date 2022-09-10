@@ -3,6 +3,7 @@ export { NotFound } from './General/NotFound'
 
 export { Users } from './Users/Users'
 export { Login } from './Users/Login'
+export { Register } from './Users/Register'
 export { UserPlaces } from './Places/UserPlaces'
 
 export { NewPlace } from './Places/NewPlace'

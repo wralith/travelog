@@ -1,4 +1,4 @@
-import { IconApps, IconHome, IconLogin, IconUser } from '@tabler/icons'
+import { IconApps, IconHome, IconLogin, IconUser, IconUserPlus } from '@tabler/icons'
 import { ReactElement } from 'react'
 import { NavLink } from 'react-router-dom'
 
@@ -14,7 +14,8 @@ const menuItems: MenuItem[] = [
   { title: 'Home', link: '/', icon: <IconHome size={iconSize} /> },
   { title: 'Users', link: '/users', icon: <IconUser size={iconSize} /> },
   { title: 'New Place', link: '/places/new', icon: <IconApps size={iconSize} /> },
-  { title: 'Login', link: '/login', icon: <IconLogin size={iconSize} /> }
+  { title: 'Login', link: '/login', icon: <IconLogin size={iconSize} /> },
+  { title: 'Register', link: '/register', icon: <IconUserPlus size={iconSize} /> }
 ]
 
 function NavbarLinks() {

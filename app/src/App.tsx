@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from './components/Shared/UI/Layout'
-import { Home, Login, NewPlace, NotFound, UpdatePlace, UserPlaces, Users } from './pages'
+import { Home, Login, NewPlace, NotFound, Register, UpdatePlace, UserPlaces, Users } from './pages'
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/users" element={<Users />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/users/:userId/places" element={<UserPlaces />} />
           <Route path="/places/new" element={<NewPlace />} />
           <Route path="/places/:placeId/update" element={<UpdatePlace />} />

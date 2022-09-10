@@ -10,7 +10,7 @@ function UserList({ users }: Props) {
       <h2>No Users Found</h2>
     </div>
   ) : (
-    <ul className="flex flex-col gap-3 w-fit">
+    <ul className="flex flex-wrap justify-center gap-3 w-fit">
       {users.map((user) => (
         <UserItem key={user.id} user={user} />
       ))}

@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import UpdatePlaceForm from '../../components/Place/UpdatePlaceForm'
 import Card from '../../components/Shared/UI/Card'
+import FormPageWrapper from '../../components/Shared/UI/Forms/FormPageWrapper'
 import { dummyPlaces } from './dummyPlaces'
 
 export function UpdatePlace() {
@@ -8,7 +9,7 @@ export function UpdatePlace() {
   const place = dummyPlaces.find((place) => place.id === placeId)
 
   return (
-    <div>
+    <FormPageWrapper>
       {place ? (
         <UpdatePlaceForm defaultValues={place as Place} />
       ) : (
@@ -16,6 +17,6 @@ export function UpdatePlace() {
           <h1>There is no such Place</h1>
         </Card>
       )}
-    </div>
+    </FormPageWrapper>
   )
 }

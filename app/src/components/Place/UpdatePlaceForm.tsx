@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { useYupValidationResolver } from '../../hooks/useYupValidationResolver'
-import FormItem from '../Shared/UI/FormItem'
+import FormItem from '../Shared/UI/Forms/FormItem'
 import { NewPlaceInputs, placeSchema } from './placeValidationSchema'
 
 interface Props {
@@ -16,7 +16,7 @@ function UpdatePlaceForm({ defaultValues }: Props) {
   } = useForm({ resolver, defaultValues })
 
   return (
-    <form onSubmit={handleSubmit((data) => console.log(data))} className="flex flex-col gap-2">
+    <form onSubmit={handleSubmit((data) => console.log(data))} className="flex flex-col gap-2 w-full">
       <FormItem error={errors.title} schema={register('title')} name="Title" />
       <FormItem error={errors.description} schema={register('description')} name="Description" type="textarea" />
       <hr className="divider m-0" />
