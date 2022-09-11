@@ -28,7 +28,7 @@ const addUser = async (user: User) => {
   const newUser = await prisma.user.create({ data: user })
 
   if (!newUser) {
-    throw new HttpError(400, `Username or email already exists`)
+    throw new HttpError(500, `Error while creating user at Service Layer`)
   }
 
   return newUser
@@ -50,20 +50,11 @@ const updateUser = async (username: string, user: User) => {
   return updatedUser
 }
 
-const getUserPlaces = async (id: string) => {
-  const places = await prisma.place.findMany({ where: { userId: id } })
 
-  if (!places) {
-    throw new HttpError(404, `Place belong to user with id ${id} does not exist in database`)
-  }
-
-  return places
-}
 export default {
   getAllUsers,
   getUser,
   addUser,
-  getUserPlaces,
   deleteUser,
   updateUser
 }

@@ -70,26 +70,10 @@ const updateUser: HandlerFunction = async (req, res, next) => {
   }
 }
 
-const getUserPlaces: HandlerFunction = async (req, res, next) => {
-  const username = req.params.username
-
-  try {
-    const user = await service.getUser(username)
-    const userId = user.id
-
-    const payload = await service.getUserPlaces(userId)
-
-    res.status(200).json(payload)
-  } catch (err) {
-    next(err)
-  }
-}
-
 export default {
   getAllUsers,
   getUser,
   addUser,
   deleteUser,
-  getUserPlaces,
   updateUser
 }

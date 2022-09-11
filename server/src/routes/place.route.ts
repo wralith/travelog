@@ -1,14 +1,13 @@
 import { Router } from 'express'
-import { addPlace, getPlaceByID, getPlacesOfUser } from '../controllers/place.controller'
+import controller from '../controllers/place.controller'
 
 const router = Router()
 
-router.get('/', (req, res, next) => {
-  res.json({ message: 'Places Root Get Request' })
-})
+router.get('/user/:id', controller.getUserPlaces)
+router.get('/:id', controller.getPlace)
+router.put('/:id', controller.updatePlace)
+router.delete('/:id', controller.deletePlace)
 
-router.get('/:placeID', getPlaceByID)
-router.get('/user/:userID', getPlacesOfUser)
-router.post('/', addPlace)
+router.post('/', controller.addPlace)
 
 export default router

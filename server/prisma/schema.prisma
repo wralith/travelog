@@ -20,8 +20,8 @@ model Place {
   description String           @default("")
   image       String           @default("")
   title       String           @default("")
-  userId      String           @db.ObjectId
-  user        User             @relation(fields: [userId], references: [id])
+  createdBy   String
+  user        User             @relation(fields: [createdBy], references: [username])
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
 }
