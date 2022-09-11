@@ -5,11 +5,14 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+    "dev": "ts-node-dev --respawn --transpile-only --exit-child src/index.ts",
+    "prisma": "prisma generate",
+    "prisma:init": "prisma db push"
   },
   "author": "wra",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^4.3.1",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "uuid": "^9.0.0",
@@ -20,6 +23,7 @@
     "@types/express": "^4.17.13",
     "@types/node": "^18.7.16",
     "@types/uuid": "^8.3.4",
+    "prisma": "^4.3.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.8.3"
   }

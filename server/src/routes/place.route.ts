@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { addPlace, getPlaceByID, getPlacesOfUser } from '../controllers/Places'
+import { addPlace, getPlaceByID, getPlacesOfUser } from '../controllers/place.controller'
 
 const router = Router()
 

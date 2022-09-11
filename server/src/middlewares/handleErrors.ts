@@ -5,6 +5,12 @@ export default function handleErrors(error: any, req: Request, res: Response, ne
     return next(error)
   }
 
+  logError(error)
+
   res.status(error.code || 500)
   res.json({ message: error.message || 'An unknown error occurred' })
+}
+
+function logError(error: any) {
+  console.log(error.message)
 }
