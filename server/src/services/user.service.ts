@@ -50,7 +50,6 @@ const updateUser = async (username: string, user: User) => {
   return updatedUser
 }
 
-
 export default {
   getAllUsers,
   getUser,

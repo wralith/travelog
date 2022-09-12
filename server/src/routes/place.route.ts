@@ -5,9 +5,11 @@ const router = Router()
 
 router.get('/user/:id', controller.getUserPlaces)
 router.get('/:id', controller.getPlace)
-router.put('/:id', controller.updatePlace)
-router.delete('/:id', controller.deletePlace)
 
 router.post('/', controller.addPlace)
+
+router.delete('/:id', controller.deletePlace)
+
+router.patch('/:id', controller.updatePlace)
 
 export default router

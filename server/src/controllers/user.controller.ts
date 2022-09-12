@@ -70,10 +70,30 @@ const updateUser: HandlerFunction = async (req, res, next) => {
   }
 }
 
+const validateUser: HandlerFunction = async (req, res, next) => {
+  const { username, password } = req.body
+
+  try {
+    const user = await service.getUser(username)
+    const payload = userDTOMapper(user as User)
+
+    if (user.password === password) {
+      res.status(200).json({ ...payload, token: 'dummyToken' }) // TODO: password bcrypt, jwt auth
+    }
+
+    const error = new HttpError(400, 'Username or password is wrong')
+
+    next(error)
+  } catch (err) {
+    next(err)
+  }
+}
+
 export default {
   getAllUsers,
   getUser,
   addUser,
   deleteUser,
-  updateUser
+  updateUser,
+  validateUser
 }
