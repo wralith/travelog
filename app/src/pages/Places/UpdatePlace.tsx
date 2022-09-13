@@ -1,18 +1,22 @@
+import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import UpdatePlaceForm from '../../components/Place/UpdatePlaceForm'
 import Card from '../../components/Shared/UI/Card'
 import FormPageWrapper from '../../components/Shared/UI/Forms/FormPageWrapper'
-import { dummyPlaces } from './dummyPlaces'
+import { api } from '../../utils/api'
 
 export function UpdatePlace() {
   const placeId = useParams().placeId
-  const place = dummyPlaces.find((place) => place.id === placeId)
+
+  const { data, isError, isLoading } = useQuery([`place-${placeId}`], () =>
+    api.get(`/places/${placeId}`).then((res) => res.data)
+  )
 
   return (
     <FormPageWrapper>
-      {place ? (
-        <UpdatePlaceForm defaultValues={place as Place} />
-      ) : (
+      {data && <UpdatePlaceForm defaultValues={data as Place} />}
+      {isLoading && 'Loading'}
+      {isError && (
         <Card>
           <h1>There is no such Place</h1>
         </Card>

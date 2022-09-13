@@ -4,6 +4,10 @@
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+
+  /* Toastify */
+  --toastify-color-progress-light: hsl(var(--p));
+  --toastify-color-progress-dark: hsl(var(--p));
 }
 
 .center {
