@@ -5,17 +5,44 @@ interface Props {
   schema: any
   error: any
   type?: 'input' | 'password' | 'textarea'
+  defaultValue?: string
+  disabled?: boolean
 }
 
-function FormItem({ name, schema, error, type = 'input' }: Props) {
+function FormItem({ name, schema, error, type = 'input', defaultValue, disabled }: Props) {
   const [animate] = useAutoAnimate<HTMLDivElement>()
 
-  let input = <input className="textarea textarea-bordered w-full" placeholder={name} {...schema} />
+  let input = (
+    <input
+      className="textarea textarea-bordered w-full"
+      placeholder={name}
+      {...schema}
+      defaultValue={defaultValue}
+      disabled={disabled}
+    />
+  )
   if (type === 'password') {
-    input = <input type="password" className="textarea textarea-bordered w-full" placeholder={name} {...schema} />
+    input = (
+      <input
+        type="password"
+        className="textarea textarea-bordered w-full"
+        placeholder={name}
+        {...schema}
+        defaultValue={defaultValue}
+        disabled={disabled}
+      />
+    )
   }
   if (type === 'textarea') {
-    input = <textarea className="textarea textarea-bordered w-full" placeholder={name} {...schema} />
+    input = (
+      <textarea
+        className="textarea textarea-bordered w-full"
+        placeholder={name}
+        {...schema}
+        defaultValue={defaultValue}
+        disabled={disabled}
+      />
+    )
   }
 
   return (

@@ -1,20 +1,15 @@
+import { useQuery } from '@tanstack/react-query'
 import UserList from '../../components/User/UserList'
+import { api } from '../../utils/api'
 
 export function Users() {
-  const users: User[] = [
-    { id: '1', name: 'Wra', image: 'https://placeimg.com/192/192/people', placeCount: 2 },
-    { id: '2', name: 'Lith', image: 'https://placeimg.com/192/192/people', placeCount: 2 },
-    { id: '3', name: 'Norman', image: 'https://placeimg.com/192/192/people', placeCount: 2 },
-    { id: '4', name: 'Page', image: 'https://placeimg.com/192/192/people', placeCount: 2 },
-    { id: '5', name: 'Billy Jean', image: 'https://placeimg.com/192/192/people', placeCount: 2 },
-    { id: '6', name: 'Michael', image: 'https://placeimg.com/192/192/people', placeCount: 2 },
-    { id: '7', name: 'Amy', image: 'https://placeimg.com/192/192/people', placeCount: 2 },
-    { id: '8', name: 'Derek', image: 'https://placeimg.com/192/192/people', placeCount: 2 }
-  ]
+  const { isLoading, error, data } = useQuery(['users'], () => api.get('/users').then((res) => res.data))
 
   return (
-    <div className='flex items-center justify-center p-5'>
-      <UserList users={users} />
+    <div className="flex items-center justify-center p-5">
+      {data && <UserList users={data as User[]} />}
+      {isLoading && 'Loading'}
+      {error && 'Error'}
     </div>
   )
 }

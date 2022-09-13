@@ -11,7 +11,7 @@ function Layout({ children }: Props) {
   return (
     <MainNavigation>
       <main className="p-2">{children}</main>
-      <ToastContainer />
+      <ToastContainer bodyClassName="bg-base-100" toastClassName="bg-base-100 text-base-content" />
     </MainNavigation>
   )
 }

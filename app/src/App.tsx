@@ -29,7 +29,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/users" element={<Users />} />
-              <Route path="/users/:userId/places" element={<UserPlaces />} />
+              <Route path="/users/:username/places" element={<UserPlaces />} />
               <Route path="*" element={<NotFound />} />
               {isLoggedIn && (
                 <>

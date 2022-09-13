@@ -3,7 +3,7 @@ import controller from '../controllers/place.controller'
 
 const router = Router()
 
-router.get('/user/:id', controller.getUserPlaces)
+router.get('/user/:username', controller.getUserPlaces)
 router.get('/:id', controller.getPlace)
 
 router.post('/', controller.addPlace)

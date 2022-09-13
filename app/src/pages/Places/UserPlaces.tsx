@@ -1,10 +1,21 @@
+import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import PlaceList from '../../components/Place/PlaceList'
+import { api } from '../../utils/api'
 import { dummyPlaces } from './dummyPlaces'
 
-
 export function UserPlaces() {
-  const userId = useParams().userId
-  const loadedPlaces = dummyPlaces.filter((place) => place.createdBy == userId)
-  return <PlaceList places={loadedPlaces} />
+  const username = useParams().username
+
+  const { isLoading, error, data } = useQuery([`${username}-places`], () =>
+    api.get(`/places/user/${username}`).then((res) => res.data)
+  )
+
+  return (
+    <div className="flex items-center justify-center p-5">
+      {data && <PlaceList places={data as Place[]} />}
+      {isLoading && 'Loading'}
+      {error && 'Error'}
+    </div>
+  )
 }

@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 
@@ -13,6 +13,9 @@ import { LoginInputs, loginSchema } from './loginValidationSchema'
 function LoginForm() {
   const auth = useContext(AuthContext)
   const navigate = useNavigate()
+  const location = useLocation().state as { username: string }
+
+  const usernameFromLocation = location?.username ? location.username : ''
 
   const resolver = useYupValidationResolver<LoginInputs>(loginSchema)
   const {
@@ -24,7 +27,7 @@ function LoginForm() {
   const loginPostRequest = (credentials: LoginInputs) => api.post('/users/login', credentials).then((res) => res.data)
 
   const mutate = useMutation(loginPostRequest, {
-    onSuccess: (data, variables, context) => {
+    onSuccess: (data) => {
       auth.login((data as User).username)
       navigate('/')
     },
@@ -34,25 +37,29 @@ function LoginForm() {
       }
     }
   })
-  // const handleLogin = async (credentials: LoginInputs) => {
-
-  // if (data) {
-  //   console.log(data)
-  //   auth.login((data as User).username)
-  //   navigate('/')
-  // }
-
-  // console.log(error)
-  // }
 
   return (
     <form onSubmit={handleSubmit((userInput) => mutate.mutateAsync(userInput))} className="flex flex-col gap-2 w-full">
-      <FormItem error={errors.username} schema={register('username')} name="Username" />
-      <FormItem error={errors.password} schema={register('password')} name="Password" type="password" />
+      <FormItem
+        error={errors.username}
+        schema={register('username')}
+        name="Username"
+        defaultValue={usernameFromLocation}
+        disabled={mutate.isLoading}
+      />
+      <FormItem
+        error={errors.password}
+        schema={register('password')}
+        name="Password"
+        type="password"
+        disabled={mutate.isLoading}
+      />
 
-      {mutate.isLoading && <p>Loading...</p>}
-
-      <input className="btn btn-primary" type="submit" />
+      <button
+        className={`btn btn-primary ${mutate.isLoading ? 'loading' : ''}`}
+        type="submit"
+        disabled={mutate.isLoading}
+      >Submit</button>
     </form>
   )
 }
