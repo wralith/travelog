@@ -1,10 +1,11 @@
 import { IconMenu2 } from '@tabler/icons'
+import { ReactNode } from 'react'
 
 import BrandLogo from '../Shared/UI/BrandLogo'
 import NavbarLinks from './NavbarLinks'
 
 interface Props {
-  children: JSX.Element
+  children: ReactNode
 }
 
 function MainNavigation({ children }: Props) {

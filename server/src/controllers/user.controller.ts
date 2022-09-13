@@ -78,7 +78,7 @@ const validateUser: HandlerFunction = async (req, res, next) => {
     const payload = userDTOMapper(user as User)
 
     if (user.password === password) {
-      res.status(200).json({ ...payload, token: 'dummyToken' }) // TODO: password bcrypt, jwt auth
+     return res.status(200).json({ ...payload, token: 'dummyToken' }) // TODO: password bcrypt, jwt auth
     }
 
     const error = new HttpError(400, 'Username or password is wrong')

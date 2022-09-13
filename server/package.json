@@ -6,8 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev --respawn --transpile-only --exit-child src/index.ts",
+    "start": "ts-node dist/src/index.js",
     "prisma": "prisma generate",
-    "prisma:init": "prisma db push"
+    "prisma:init": "prisma db push",
+    "build": "tsc -p ."
   },
   "author": "wra",
   "license": "MIT",
@@ -24,6 +26,7 @@
     "@types/node": "^18.7.16",
     "@types/uuid": "^8.3.4",
     "prisma": "^4.3.1",
+    "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.8.3"
   }
