@@ -8,13 +8,13 @@ import { api } from '../../utils/api'
 export function UpdatePlace() {
   const placeId = useParams().placeId
 
-  const { data, isError, isLoading } = useQuery([`place-${placeId}`], () =>
+  const { data, isError, isLoading, refetch } = useQuery([`place-${placeId}`], () =>
     api.get(`/places/${placeId}`).then((res) => res.data)
   )
 
   return (
     <FormPageWrapper>
-      {data && <UpdatePlaceForm defaultValues={data as Place} />}
+      {data && <UpdatePlaceForm defaultValues={data as Place} refetch={refetch} />}
       {isLoading && 'Loading'}
       {isError && (
         <Card>

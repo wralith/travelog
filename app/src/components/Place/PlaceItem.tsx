@@ -8,12 +8,12 @@ import Modal from '../Shared/UI/Modal'
 
 interface Props {
   place: Place | null
+  refetch: Function
 }
 
-function PlaceItem(props: Props) {
+function PlaceItem({ place, refetch }: Props) {
   const userContext = useContext(AuthContext)
 
-  const [place, setPlace] = useState(props.place)
   const [showMap, setShowMap] = useState(false)
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
   const toggleMap = () => setShowMap(!showMap)
@@ -24,7 +24,7 @@ function PlaceItem(props: Props) {
       .delete(`/places/${id}`)
       .then((res) => {
         setShowDeleteConfirmation(false)
-        setPlace(null)
+        refetch()
         toast(`${place?.title} successfully deleted.`, { type: 'success' })
         return
       })
@@ -75,14 +75,14 @@ function PlaceItem(props: Props) {
         )}
         <li className="w-full lg:w-1/2">
           <Card className="flex-col m-2 p-0 pb-3">
-            <img src={place.image} alt={place.title} className="h-96" />
+            <img src={place.image} alt={place.title} className="h-96 w-full" />
             <div className="text-center">
               <h2 className="font-bold text-2xl">{place.title}</h2>
               <h3 className="font-bold text-lg">{place.address}</h3>
               <p>{place.description}</p>
             </div>
             <hr className="w-full border-base-content/30" />
-            <div className="flex p-2 gap-2">
+            <div className="flex p-2 gap-2 flex-wrap justify-center">
               <button className="btn btn-sm btn-primary" onClick={() => toggleMap()}>
                 Show on Map
               </button>
@@ -102,7 +102,7 @@ function PlaceItem(props: Props) {
       </>
     )
   } else {
-    return
+    return <></>
   }
 }
 

@@ -11,9 +11,10 @@ import { placeSchema, UpdatePlaceInputs } from './placeValidationSchema'
 
 interface Props {
   defaultValues: Place
+  refetch: Function
 }
 
-function UpdatePlaceForm({ defaultValues }: Props) {
+function UpdatePlaceForm({ defaultValues, refetch }: Props) {
   const navigate = useNavigate()
   const userContext = useContext(AuthContext)
 
@@ -33,6 +34,7 @@ function UpdatePlaceForm({ defaultValues }: Props) {
   const mutate = useMutation(updatePlacePostRequest, {
     onSuccess: (data) => {
       toast(`${data.title} is successfully updated`)
+      refetch()
       navigate(`/users/${userContext.loggedUser}/places`)
     },
     onError: (data) => {

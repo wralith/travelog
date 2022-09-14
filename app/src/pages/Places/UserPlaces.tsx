@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import PlaceList from '../../components/Place/PlaceList'
 import { api } from '../../utils/api'
-import { dummyPlaces } from './dummyPlaces'
 
 export function UserPlaces() {
   const username = useParams().username
