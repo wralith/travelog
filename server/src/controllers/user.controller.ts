@@ -4,6 +4,7 @@ import { User, userDTOMapper } from '../models/user.model'
 import service from '../services/user.service'
 import { HandlerFunction } from '../types/HandlerFunction'
 import { HttpError } from '../utils/HttpError'
+import signToken from '../utils/signToken'
 
 const getAllUsers: HandlerFunction = async (req, res, next) => {
   try {
@@ -79,12 +80,12 @@ const validateUser: HandlerFunction = async (req, res, next) => {
   try {
     const user = await service.getUser(username)
     const isPasswordMatch = await bcrypt.compare(password, user.password)
-    
-    const payload = userDTOMapper(user as User)
 
-    // if (user.password === password) {
+    const payload = userDTOMapper(user as User)
+    const token = signToken({ userId: user.id, username: user.username })
+
     if (isPasswordMatch) {
-      return res.status(200).json({ ...payload, token: 'dummyToken' }) // TODO: password bcrypt, jwt auth
+      return res.status(200).json({ ...payload, token: token })
     }
 
     const error = new HttpError(400, 'Username or password is wrong')
