@@ -10,14 +10,17 @@ const app = express()
 
 app.use(express.json())
 
-app.use(
-  cors({
-    origin: 'http://localhost:5173',
-    methods: ['GET', 'POST', 'DELETE', 'PATCH'],
-    credentials: true,
-    allowedHeaders: 'Authorization'
-  })
-)
+// app.use(
+//  cors({
+//    origin: 'http://localhost:5173',
+//    methods: ['GET', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
+//    credentials: true,
+//    allowedHeaders: ['Authorization']
+//  })
+//)
+//
+app.use(cors())
+
 app.use('/users', userRoutes)
 app.use('/places', placeRoutes)
 

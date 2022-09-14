@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from './components/Shared/UI/Layout'
 import { AuthContext } from './context/authContext'
@@ -8,22 +8,31 @@ import { Home, Login, NewPlace, NotFound, Register, UpdatePlace, UserPlaces, Use
 const queryClient = new QueryClient()
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [token, setToken] = useState<string | null>(null)
   const [loggedUser, setLoggedUser] = useState<string | null>(null)
 
-  const login = useCallback((username: string) => {
+  const login = useCallback((username: string, token: string) => {
     setLoggedUser(username)
-    setIsLoggedIn(true)
+    localStorage.setItem('userData', JSON.stringify({ username: username, token: token }))
+    setToken(token)
   }, [])
 
   const logout = useCallback(() => {
     setLoggedUser(null)
-    setIsLoggedIn(false)
+    setToken(null)
+    localStorage.removeItem('userData')
   }, [])
+
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem('userData') as string)
+    if (storedData && storedData.token) {
+      login(storedData.username, storedData.token)
+    }
+  }, [login])
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthContext.Provider value={{ isLoggedIn, login, logout, loggedUser }}>
+      <AuthContext.Provider value={{ isLoggedIn: !!token, token, login, logout, loggedUser }}>
         <BrowserRouter>
           <Layout>
             <Routes>
@@ -31,13 +40,13 @@ function App() {
               <Route path="/users" element={<Users />} />
               <Route path="/users/:username/places" element={<UserPlaces />} />
               <Route path="*" element={<NotFound />} />
-              {isLoggedIn && (
+              {token && (
                 <>
                   <Route path="/places/:placeId/update" element={<UpdatePlace />} />
                   <Route path="/places/new" element={<NewPlace />} />
                 </>
               )}
-              {!isLoggedIn && (
+              {!token && (
                 <>
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />

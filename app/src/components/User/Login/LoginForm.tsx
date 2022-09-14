@@ -28,7 +28,7 @@ function LoginForm() {
 
   const mutate = useMutation(loginPostRequest, {
     onSuccess: (data) => {
-      auth.login((data as User).username)
+      auth.login(data.username, data.token)
       navigate('/')
     },
     onError: (data) => {
